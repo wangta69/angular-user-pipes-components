@@ -1,0 +1,62 @@
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+
+/**
+ * Access to the global window variable.
+ */
+declare var window: {
+  [key: string]: any;
+  prototype: Window;
+  new (): Window;
+};
+
+/**
+ * Service for injecting the Matomo tracker in the application.
+ *
+ * @export
+ */
+@Injectable()
+export class MatomoInjector {
+    // @Inject(PLATFORM_ID) private platformId: any
+  /**
+   * Creates an instance of MatomoInjector.
+   *
+   * @param platformId Angular description of the platform.
+   */
+  constructor(@Inject(PLATFORM_ID) private platformId: any) {
+    if (isPlatformBrowser(this.platformId)) {
+      (window as any)._paq = (window as any)._paq || [];
+    } else {
+      console.warn('MatomoInjector can\'t be used on server platform');
+    }
+  }
+
+  /**
+   * Injects the Matomo tracker in the DOM.
+   *
+   * @param url URL of the Matomo instance to connect to.
+   * @param id SiteId for this application/site.
+   * @param [scriptUrl] Optional URL for the `piwik.js`/`matomo.js` script in case it is not at its default location.
+   */
+  public init(url: string, id: number, scriptUrl?: string): void {
+
+
+    if (isPlatformBrowser(this.platformId)) {
+      (window as any)._paq.push(['trackPageView']);
+      (window as any)._paq.push(['enableLinkTracking']);
+      (() => {
+        const u = url;
+        (window as any)._paq.push(['setTrackerUrl', u + 'matomo.php']);
+        (window as any)._paq.push(['setSiteId', id.toString()]);
+        const d = document;
+        const g = d.createElement('script');
+        const s: any = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript';
+        g.async = true;
+        g.defer = true;
+        g.src = !!scriptUrl ? scriptUrl : u + 'matomo.js';
+        s.parentNode.insertBefore(g, s);
+      })();
+    }
+  }
+}

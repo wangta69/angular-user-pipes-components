@@ -1,0 +1,25 @@
+nav{
+    ul{
+        text-align: center;
+        justify-content: center;
+        margin-bottom: 0;
+        li{
+            a.page-link{
+                color:#627281;
+                background: none;
+                border:none;
+                font-size: 12px;
+                font-weight: bold;
+                cursor: pointer;
+                i{
+                    font-size: 10px;
+                }
+            }
+            &.active{
+                a{
+                    color:#95a6b5;
+                }
+            }
+        }
+    }
+}
