@@ -31,3 +31,12 @@ anyMethod() {
 
 ```
 
+```
+this.SnackbarSvc.show(message, options);
+options: {
+    show: true | false
+    type: 'danger' | 'success'
+    timeout: 2000  (milisecond)
+}
+```
+
