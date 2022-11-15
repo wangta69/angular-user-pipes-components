@@ -88,8 +88,10 @@ export class CalendarComponent {
     // 다음달 로 넘기는 이벤트
     public next() {
         const next = this.month.clone();
-        this.removeTime( next.month(   next.month() + 1).date(1));
+
+        this.removeTime( next.month( next.month() + 1).date(1));
         this.month.month(this.month.month() + 1);
+        this.ym = this.month.clone();
         this.buildMonth(next, this.month);
     }
 
@@ -98,6 +100,7 @@ export class CalendarComponent {
         const previous = this.month.clone();
         this.removeTime(previous.month(previous.month() - 1).date(1));
         this.month.month(this.month.month() - 1);
+        this.ym = this.month.clone();
         this.buildMonth( previous, this.month);
     }
 }

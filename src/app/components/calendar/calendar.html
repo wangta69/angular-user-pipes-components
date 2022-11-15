@@ -1,6 +1,6 @@
 <div class="calendar">
     <div class="dash">
-        <strong>{{todayDate | moment:'YYYY년 MM월'}}</strong>
+        <strong>{{ym | moment:'YYYY년 MM월'}}</strong>
         <div class="controller">
             <button type="button" title="이전달" (click)="previous()"><<</button>
             <button type="button" title="다음달" (click)="next()">>></button>
