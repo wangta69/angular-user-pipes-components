@@ -1,0 +1,24 @@
+<div class="calendar">
+    <div class="dash">
+        <strong>{{todayDate | moment:'YYYY년 MM월'}}</strong>
+        <div class="controller">
+            <button type="button" title="이전달" (click)="previous()"><<</button>
+            <button type="button" title="다음달" (click)="next()">>></button>
+        </div>
+    </div>
+    <div class="week names">
+        <span class="day sun">일</span>
+        <span class="day">월</span>
+        <span class="day">화</span>
+        <span class="day">수</span>
+        <span class="day">목</span>
+        <span class="day">금</span>
+        <span class="day sat">토</span>
+    </div>
+    <div class="week" *ngFor="let week of weeks">
+        <div *ngFor="let day of week.days" class="day" [ngClass]="{ 'today': day.isToday, 'different-month': !day.isCurrentMonth, 'selected': day.date.isSame(ym) }" (click)="select(day)">
+            <span>{{day.number}}</span>
+
+        </div>
+    </div>
+</div>
