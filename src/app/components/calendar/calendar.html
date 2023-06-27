@@ -18,7 +18,6 @@
     <div class="week" *ngFor="let week of weeks">
         <div *ngFor="let day of week.days" class="day" [ngClass]="{ 'today': day.isToday, 'different-month': !day.isCurrentMonth, 'selected': day.date.isSame(ym) }" (click)="select(day)">
             <span>{{day.number}}</span>
-
         </div>
     </div>
 </div>

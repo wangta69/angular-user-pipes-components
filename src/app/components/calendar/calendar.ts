@@ -11,15 +11,11 @@ import * as moment from 'moment';
 
 export class CalendarComponent {
 
-    todayDate = new Date();
     attendances = {}; // 출석일{mmdd : YYYY-MM-DD HH:ii:ss}
     ym: any;
     weeks = [];
     month: any;
 
-    // @Input('ym') set mypage(value: string) {
-    //     this.ym = value;
-    // }
 
     constructor() {
         // 카렌다를 만든다.
@@ -57,13 +53,10 @@ export class CalendarComponent {
         // 한주의 첫번쨰 날과 달의 정보를 받는다.
         const days = []; // 총 7일의 정보가 들어간다.
         for (let i = 0; i < 7; i++) {
-            const mmdd = ('0' + (parseInt(date.month(), 10) + 1)).slice(-2) + ('0' + date.date()).slice(-2);
             days.push({
-                name: date.format('dd').substring(0, 1),
                 number: date.date(),
                 isCurrentMonth: date.month() === month.month(),
                 isToday: date.isSame(new Date(), 'day'),
-                isattendances: typeof(this.attendances[mmdd]) !== 'undefined',
                 date
             });
             date = date.clone();
